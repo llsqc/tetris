@@ -158,4 +158,46 @@ public class BlockManagement : IDraw
 
         return true;
     }
+
+    public void Move(E_ChangeType type)
+    {
+        ClearDraw();
+
+        Position movePos = new Position(type == E_ChangeType.Left ? -2 : 2, 0);
+        for (int i = 0; i < blocks.Count; i++)
+        {
+            blocks[i].pos += movePos;
+        }
+
+        Draw();
+    }
+
+    public bool CanMove(E_ChangeType type, Map map)
+    {
+        Position movePos = new Position(type == E_ChangeType.Left ? -2 : 2, 0);
+
+        Position pos;
+        for (int i = 0; i < blocks.Count; i++)
+        {
+            pos = blocks[i].pos + movePos;
+            if (pos.x < 2 || pos.x >= Game.width - 2)
+            {
+                return false;
+            }
+        }
+
+        for (int i = 0; i < blocks.Count; i++)
+        {
+            pos = blocks[i].pos + movePos;
+            for (int j = 0; j < map.dynamicWalls.Count; j++)
+            {
+                if (pos == map.dynamicWalls[j].pos)
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
 }
