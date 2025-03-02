@@ -2,17 +2,15 @@
 
 public class GameScene : ISceneUpdate
 {
-
-    int updateIndex = 0;
+    Map map = null;
 
     public GameScene()
     {
-
+        map = new Map();
     }
 
     public void Update()
     {
-        Console.ReadKey(true);
-        Game.ChangeScene(ESceneType.End);
+        map.Draw();
     }
 }
