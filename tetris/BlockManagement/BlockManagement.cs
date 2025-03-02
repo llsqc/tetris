@@ -200,4 +200,50 @@ public class BlockManagement : IDraw
 
         return true;
     }
+
+    public void AutoMove()
+    {
+        ClearDraw();
+
+        Position downMove = new Position(0, 1);
+        for (int i = 0; i < blocks.Count; i++)
+        {
+            blocks[i].pos += downMove;
+        }
+
+        Draw();
+    }
+
+    public bool CanAutoMove(Map map)
+    {
+        Position movePos = new Position(0, 1);
+
+        Position pos;
+        for (int i = 0; i < blocks.Count; i++)
+        {
+            pos = blocks[i].pos + movePos;
+            if (pos.y >= map.mapH)
+            {
+                map.AddWalls(blocks);
+                RandomCreateBlock();
+                return false;
+            }
+        }
+
+        for (int i = 0; i < blocks.Count; i++)
+        {
+            pos = blocks[i].pos + movePos;
+            for (int j = 0; j < map.dynamicWalls.Count; j++)
+            {
+                if (pos == map.dynamicWalls[j].pos)
+                {
+                    map.AddWalls(blocks);
+                    RandomCreateBlock();
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
 }

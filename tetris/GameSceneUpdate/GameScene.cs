@@ -14,38 +14,49 @@ public class GameScene : ISceneUpdate
     public void Update()
     {
         map.Draw();
+
         blockManagement.Draw();
 
-        switch (Console.ReadKey(true).Key)
+        if (blockManagement.CanAutoMove(map))
         {
-            case ConsoleKey.LeftArrow:
-                if (blockManagement.CanChange(E_ChangeType.Left, map))
-                {
-                    blockManagement.Change(E_ChangeType.Left);
-                }
+            blockManagement.AutoMove();
+        }
 
-                break;
-            case ConsoleKey.RightArrow:
-                if (blockManagement.CanChange(E_ChangeType.Right, map))
-                {
-                    blockManagement.Change(E_ChangeType.Right);
-                }
+        Thread.Sleep(200);
 
-                break;
-            case ConsoleKey.A:
-                if (blockManagement.CanMoveLeftRight(E_ChangeType.Left, map))
-                {
-                    blockManagement.MoveLeftRight(E_ChangeType.Left);
-                }
+        if (Console.KeyAvailable)
+        {
+            switch (Console.ReadKey(true).Key)
+            {
+                case ConsoleKey.LeftArrow:
+                    if (blockManagement.CanChange(E_ChangeType.Left, map))
+                    {
+                        blockManagement.Change(E_ChangeType.Left);
+                    }
 
-                break;
-            case ConsoleKey.D:
-                if (blockManagement.CanMoveLeftRight(E_ChangeType.Right, map))
-                {
-                    blockManagement.MoveLeftRight(E_ChangeType.Right);
-                }
+                    break;
+                case ConsoleKey.RightArrow:
+                    if (blockManagement.CanChange(E_ChangeType.Right, map))
+                    {
+                        blockManagement.Change(E_ChangeType.Right);
+                    }
 
-                break;
+                    break;
+                case ConsoleKey.A:
+                    if (blockManagement.CanMoveLeftRight(E_ChangeType.Left, map))
+                    {
+                        blockManagement.MoveLeftRight(E_ChangeType.Left);
+                    }
+
+                    break;
+                case ConsoleKey.D:
+                    if (blockManagement.CanMoveLeftRight(E_ChangeType.Right, map))
+                    {
+                        blockManagement.MoveLeftRight(E_ChangeType.Right);
+                    }
+
+                    break;
+            }
         }
     }
 }
