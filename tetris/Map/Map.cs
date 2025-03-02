@@ -3,16 +3,21 @@
 public class Map : IDraw
 {
     private List<DrawObject> walls = new List<DrawObject>();
-    private List<DrawObject> dynamicWalls = new List<DrawObject>();
+    public List<DrawObject> dynamicWalls = new List<DrawObject>();
+
+    public int mapW;
+    public int mapH;
 
     public Map()
     {
+        mapH = Game.height - 6;
+
         for (int i = 0; i < Game.width; i += 2)
         {
-            walls.Add(new DrawObject(E_DrawType.Wall, i, Game.height - 6));
+            walls.Add(new DrawObject(E_DrawType.Wall, i, mapH));
         }
 
-        for (int i = 0; i < Game.height - 6; i++)
+        for (int i = 0; i < mapH; i++)
         {
             walls.Add(new DrawObject(E_DrawType.Wall, 0, i));
             walls.Add(new DrawObject(E_DrawType.Wall, Game.width - 2, i));

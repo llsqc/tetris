@@ -12,7 +12,7 @@ public enum E_DrawType
     L // L型（右）
 }
 
-public struct DrawObject : IDraw
+public class DrawObject : IDraw
 {
     public Position pos;
     public E_DrawType type;
@@ -57,6 +57,12 @@ public struct DrawObject : IDraw
         }
 
         Console.Write("■");
+    }
+
+    public void ClearDrawObject()
+    {
+        Console.SetCursorPosition(pos.x, pos.y);
+        Console.Write("  ");
     }
 
     //TODO: 将方块类型转换成墙壁
