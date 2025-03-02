@@ -159,7 +159,7 @@ public class BlockManagement : IDraw
         return true;
     }
 
-    public void Move(E_ChangeType type)
+    public void MoveLeftRight(E_ChangeType type)
     {
         ClearDraw();
 
@@ -172,7 +172,7 @@ public class BlockManagement : IDraw
         Draw();
     }
 
-    public bool CanMove(E_ChangeType type, Map map)
+    public bool CanMoveLeftRight(E_ChangeType type, Map map)
     {
         Position movePos = new Position(type == E_ChangeType.Left ? -2 : 2, 0);
 

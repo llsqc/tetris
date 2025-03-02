@@ -33,16 +33,16 @@ public class GameScene : ISceneUpdate
 
                 break;
             case ConsoleKey.A:
-                if (blockManagement.CanMove(E_ChangeType.Left, map))
+                if (blockManagement.CanMoveLeftRight(E_ChangeType.Left, map))
                 {
-                    blockManagement.Move(E_ChangeType.Left);
+                    blockManagement.MoveLeftRight(E_ChangeType.Left);
                 }
 
                 break;
             case ConsoleKey.D:
-                if (blockManagement.CanMove(E_ChangeType.Right, map))
+                if (blockManagement.CanMoveLeftRight(E_ChangeType.Right, map))
                 {
-                    blockManagement.Move(E_ChangeType.Right);
+                    blockManagement.MoveLeftRight(E_ChangeType.Right);
                 }
 
                 break;
