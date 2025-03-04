@@ -5,12 +5,15 @@ public class GameScene : ISceneUpdate
     Map map;
     BlockManagement blockManagement;
 
+    bool isRunning;
+
     Thread inputThread;
 
     public GameScene()
     {
-        map = new Map();
+        map = new Map(this);
         blockManagement = new BlockManagement();
+        isRunning = true;
 
         inputThread = new Thread(CheckInputThread)
         {
@@ -21,7 +24,7 @@ public class GameScene : ISceneUpdate
 
     private void CheckInputThread()
     {
-        while (true)
+        while (isRunning)
         {
             if (Console.KeyAvailable)
             {
@@ -85,5 +88,11 @@ public class GameScene : ISceneUpdate
         }
 
         Thread.Sleep(200);
+    }
+
+    public void StopThread()
+    {
+        isRunning = false;
+        inputThread = null;
     }
 }

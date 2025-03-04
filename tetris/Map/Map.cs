@@ -7,13 +7,16 @@ public class Map : IDraw
     private List<DrawObject> walls = new List<DrawObject>();
     public List<DrawObject> dynamicWalls = new List<DrawObject>();
 
+    private GameScene nowGameScene;
+
     public int mapW;
     public int mapH;
 
     private int[] recordInfo;
 
-    public Map()
+    public Map(GameScene scene)
     {
+        nowGameScene = scene;
         mapH = Game.height - 6;
         mapW = 0;
 
@@ -61,6 +64,13 @@ public class Map : IDraw
         {
             walls[i].ChangeType(E_DrawType.Wall);
             dynamicWalls.Add(walls[i]);
+
+            if (walls[i].pos.y <= 0)
+            {
+                nowGameScene.StopThread();
+                Game.ChangeScene(ESceneType.End);
+                return;
+            }
 
             recordInfo[mapH - 1 - walls[i].pos.y]++;
         }

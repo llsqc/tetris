@@ -46,7 +46,7 @@ public class BlockManagement : IDraw
             new DrawObject(type)
         };
 
-        blocks[0].pos = new Position(24, 5);
+        blocks[0].pos = new Position(24, -5);
         nowBlockInfo = blockInfoDic[type];
 
         nowInfoIndex = rnd.Next(0, nowBlockInfo.Count);

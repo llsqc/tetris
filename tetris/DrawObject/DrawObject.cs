@@ -29,6 +29,8 @@ public class DrawObject : IDraw
 
     public void Draw()
     {
+        if (pos.y < 0) return;
+
         Console.SetCursorPosition(pos.x, pos.y);
         switch (type)
         {
@@ -61,6 +63,7 @@ public class DrawObject : IDraw
 
     public void ClearDrawObject()
     {
+        if (pos.y < 0) return;
         Console.SetCursorPosition(pos.x, pos.y);
         Console.Write("  ");
     }
